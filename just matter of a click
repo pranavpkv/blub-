@@ -1,0 +1,43 @@
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Set up the screen
+WIDTH, HEIGHT = 400, 200
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Switch Bulb On/Off")
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+YELLOW = (255, 255, 0)
+
+# Variables
+bulb_on = False
+
+def switch_bulb():
+    global bulb_on
+    bulb_on = not bulb_on
+
+def draw_screen():
+    screen.fill(WHITE)
+    pygame.draw.circle(screen, YELLOW if bulb_on else BLACK, (200, 100), 50)
+    pygame.display.flip()
+
+# Main loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # Left mouse button
+                switch_bulb()
+
+    draw_screen()
+
+# Quit Pygame
+pygame.quit()
+sys.exit()
